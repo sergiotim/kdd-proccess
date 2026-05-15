@@ -1,5 +1,10 @@
 const phases = [
     {
+        title: "O que é o KDD?",
+        desc: "KDD (Knowledge Discovery in Databases) é o processo de extrair conhecimento útil e compreensível a partir de grandes volumes de dados. Nesta demonstração, veremos como transformar milhares de avaliações brutas da Amazon em uma decisão de compra clara.",
+        theme: "light"
+    },
+    {
         title: "1. Seleção",
         desc: "A Amazon tem milhões de produtos. Para tomar uma decisão inteligente, o cliente não precisa da loja inteira. Nossa primeira missão no KDD é a Seleção: isolamos de uma base gigante apenas as 10.000 avaliações exclusivas sobre o produto 'Fone Bluetooth X'.",
         theme: "light"
@@ -27,7 +32,7 @@ const phases = [
 ];
 
 // Estado
-let currentPhase = 1;
+let currentPhase = 0;
 const totalPhases = phases.length;
 
 // Elementos DOM
@@ -63,14 +68,17 @@ function init() {
     updateUI();
     
     nextBtn.addEventListener('click', () => {
-        if (currentPhase < totalPhases) {
+        if (currentPhase < totalPhases - 1) {
             currentPhase++;
+            updateUI();
+        } else if (currentPhase === totalPhases - 1) {
+            currentPhase = 0; // Reset
             updateUI();
         }
     });
     
     prevBtn.addEventListener('click', () => {
-        if (currentPhase > 1) {
+        if (currentPhase > 0) {
             currentPhase--;
             updateUI();
         }
@@ -94,7 +102,7 @@ function createParticles(count) {
         
         // Random initial position around the left side (Selection phase)
         const x = 5 + Math.random() * 15; // 5% to 20% width
-        const y = 20 + Math.random() * 60; // 20% to 80% height
+        const y = 15 + Math.random() * 45; // 15% to 60% height
         
         particle.style.left = `${x}%`;
         particle.style.top = `${y}%`;
@@ -106,22 +114,28 @@ function createParticles(count) {
 }
 
 function updateUI() {
-    const phaseData = phases[currentPhase - 1];
+    const phaseData = phases[currentPhase];
     
     // Atualizar Textos
-    phaseBadge.textContent = `Fase ${currentPhase}/5`;
+    if (currentPhase === 0) {
+        phaseBadge.textContent = "Introdução";
+    } else {
+        phaseBadge.textContent = `Fase ${currentPhase}/5`;
+    }
     phaseTitle.textContent = phaseData.title;
     phaseDescription.textContent = phaseData.desc;
     
     // Atualizar Botões
-    prevBtn.disabled = currentPhase === 1;
-    if (currentPhase === totalPhases) {
-        nextBtn.textContent = "Finalizar";
-        nextBtn.disabled = true;
+    prevBtn.disabled = currentPhase === 0;
+    
+    if (currentPhase === 0) {
+        nextBtn.textContent = "Começar ➔";
+    } else if (currentPhase === totalPhases - 1) {
+        nextBtn.textContent = "Reiniciar ↺";
     } else {
         nextBtn.textContent = "Avançar Fluxo ➔";
-        nextBtn.disabled = false;
     }
+    nextBtn.disabled = false;
     
     // Atualizar Temas (Dark Mode na Fase 4 e 5)
     if (phaseData.theme === 'dark') {
@@ -139,14 +153,22 @@ function animateParticles() {
     aiCore.classList.remove('active');
     goldenSummary.classList.remove('visible');
     
+    if (currentPhase === 0) {
+        body.classList.add('intro-mode');
+    } else {
+        body.classList.remove('intro-mode');
+    }
+    
     particles.forEach((p, index) => {
         // Restaurar visibilidade
         p.style.opacity = '1';
         
-        if (currentPhase === 1) {
+        if (currentPhase === 0) {
+            p.style.opacity = '0';
+        } else if (currentPhase === 1) {
             // Fase 1: Bagunça do lado esquerdo (Seleção)
             const x = 5 + Math.random() * 15;
-            const y = 20 + Math.random() * 60;
+            const y = 15 + Math.random() * 45;
             p.style.left = `${x}%`;
             p.style.top = `${y}%`;
             p.style.transform = `scale(1) rotate(${Math.random() * 20 - 10}deg)`;
@@ -155,7 +177,7 @@ function animateParticles() {
         } else if (currentPhase === 2) {
             // Fase 2: Mover para o meio-esquerda, remover spam
             const x = 25 + Math.random() * 15;
-            const y = 20 + Math.random() * 60;
+            const y = 15 + Math.random() * 45;
             p.style.left = `${x}%`;
             p.style.top = `${y}%`;
             p.style.transform = `scale(0.9) rotate(0deg)`;
@@ -170,7 +192,7 @@ function animateParticles() {
         } else if (currentPhase === 3) {
             // Fase 3: Mover para a direita, transformar em matrizes
             const x = 45 + Math.random() * 15;
-            const y = 20 + Math.random() * 60;
+            const y = 15 + Math.random() * 45;
             p.style.left = `${x}%`;
             p.style.top = `${y}%`;
             
@@ -187,7 +209,7 @@ function animateParticles() {
             if (p.style.opacity !== '0') {
                 // Atrair todas as partículas para a posição da Fase 4 (70% da tela)
                 p.style.left = `70%`;
-                p.style.top = `50%`;
+                p.style.top = `35%`;
                 p.style.transform = `translate(-50%, -50%) scale(0.1) rotate(${Math.random() * 360}deg)`;
                 
                 // Desaparecer ao chegar no núcleo

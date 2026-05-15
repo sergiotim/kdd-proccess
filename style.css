@@ -87,7 +87,7 @@ body.dark-mode {
 /* Cenas Fixas de Fundo */
 #scene-wrapper {
     position: absolute;
-    top: 50%;
+    top: 35%;
     transform: translateY(-50%);
     display: flex;
     width: 80%;
@@ -99,6 +99,15 @@ body.dark-mode {
 
 body.dark-mode #scene-wrapper {
     opacity: 0.1; /* Fade out scenes in dark mode */
+}
+
+body.intro-mode #scene-wrapper {
+    opacity: 1; /* Cenas ficam bem visíveis na introdução */
+}
+
+body.intro-mode .scene {
+    transform: scale(1.05);
+    transition: transform var(--transition-medium);
 }
 
 .scene {
@@ -176,7 +185,7 @@ body.dark-mode .particle {
 /* O Núcleo de IA */
 #ai-core {
     position: absolute;
-    top: 50%;
+    top: 35%;
     left: 70%;
     transform: translate(-50%, -50%) scale(0);
     z-index: 5;
@@ -222,7 +231,7 @@ body.dark-mode .particle {
 /* Golden Summary */
 #golden-summary {
     position: absolute;
-    top: 50%;
+    top: 35%;
     left: 85%;
     transform: translate(-50%, -50%) scale(0.8) translateY(20px);
     z-index: 20;
