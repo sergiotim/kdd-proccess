@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Processo KDD: Amazon Reviews</title>
+    <meta name="description" content="Demonstração interativa do processo KDD focado em Sumarização de Reviews.">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Cabeçalho (Título e Logo) -->
+    <header id="site-header">
+        <div class="logo-container">
+            <!-- Amazon Logo Oficial -->
+            <img src="https://upload.wikimedia.org/wikipedia/commons/a/a9/Amazon_logo.svg" alt="Amazon Logo" width="120">
+        </div>
+        <div class="header-text">
+            <h1>Processo KDD em Ação</h1>
+            <p>Descoberta de Conhecimento em Bancos de Dados: Extraindo valor e sumarizando milhares de avaliações de clientes.</p>
+        </div>
+    </header>
+    <!-- Container principal (Palco) -->
+    <main id="kdd-stage" class="phase-1">
+        <!-- Partículas e Elementos Flutuantes -->
+        <div id="particle-container"></div>
+        
+        <!-- O Núcleo (Ativo na Fase 4 e 5) -->
+        <div id="ai-core">
+            <div class="core-rings"></div>
+            <div class="core-center"></div>
+        </div>
+
+        <!-- Cenas Físicas -->
+        <div id="scene-wrapper">
+            <section class="scene" id="scene-1">
+                <div class="icon-container">
+                    <!-- Lupa SVG -->
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                </div>
+                <h2>1. Seleção</h2>
+            </section>
+            <section class="scene" id="scene-2">
+                <div class="icon-container">
+                    <!-- Filtro SVG -->
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"></polygon></svg>
+                </div>
+                <h2>2. Pré-processamento</h2>
+            </section>
+            <section class="scene" id="scene-3">
+                <div class="icon-container">
+                    <!-- Código SVG -->
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>
+                </div>
+                <h2>3. Transformação</h2>
+            </section>
+            <section class="scene" id="scene-4">
+                <div class="icon-container">
+                    <!-- CPU SVG -->
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="2" ry="2"></rect><rect x="9" y="9" width="6" height="6"></rect><line x1="9" y1="1" x2="9" y2="4"></line><line x1="15" y1="1" x2="15" y2="4"></line><line x1="9" y1="20" x2="9" y2="23"></line><line x1="15" y1="20" x2="15" y2="23"></line><line x1="20" y1="9" x2="23" y2="9"></line><line x1="20" y1="14" x2="23" y2="14"></line><line x1="1" y1="9" x2="4" y2="9"></line><line x1="1" y1="14" x2="4" y2="14"></line></svg>
+                </div>
+                <h2>4. Mineração de Dados</h2>
+            </section>
+            <section class="scene" id="scene-5">
+                <div class="icon-container">
+                    <!-- Insight/Estrela SVG -->
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                </div>
+                <h2>5. Avaliação e Interpretação</h2>
+            </section>
+        </div>
+    </main>
+
+    <!-- O Sumário de Ouro (Fase 5) -->
+    <div id="golden-summary" class="hidden">
+        <div class="summary-content">
+            <h3>Conhecimento Extraído</h3>
+            <p><strong>"O consenso: A bateria é excelente, mas o peso do fone incomoda."</strong></p>
+            <span class="badge">Decisão Pronta para Compra</span>
+        </div>
+    </div>
+
+    <!-- UI Didática (Controls) -->
+    <nav id="story-controls">
+        <div class="glass-panel">
+            <div id="didactic-panel">
+                <span class="phase-badge" id="phase-badge">Fase 1/5</span>
+                <h2 id="phase-title">O Oceano de Ruído</h2>
+                <p id="phase-description">A Amazon tem milhões de produtos. Para tomar uma decisão inteligente, o cliente não precisa da loja inteira. Nossa primeira missão no KDD é o isolamento: selecionamos de uma base gigante apenas as 10.000 avaliações sobre o produto 'Fone Bluetooth X'.</p>
+            </div>
+            <div class="actions">
+                <button id="prev-btn" class="btn-secondary" disabled>Anterior</button>
+                <button id="next-btn" class="btn-amazon">Avançar Fluxo ➔</button>
+            </div>
+        </div>
+    </nav>
+
+    <script src="script.js"></script>
+</body>
+</html>

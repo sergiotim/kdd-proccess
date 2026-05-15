@@ -1,0 +1,381 @@
+:root {
+    /* Amazon Colors */
+    --bg-light: #F2F4F8;
+    --bg-dark: #0f1b29;
+    --bg-dark-secondary: #232F3E;
+    --amazon-orange: #FF9900;
+    --amazon-orange-hover: #e88b00;
+    --text-dark: #111;
+    --text-light: #F2F4F8;
+    --text-muted: #666;
+    --text-muted-light: #a0aec0;
+    
+    /* Other colors */
+    --gold: #F3B329;
+    --gold-glow: rgba(243, 179, 41, 0.4);
+    --aws-cyan: #00A1C9;
+    
+    --transition-slow: 1.5s cubic-bezier(0.25, 1, 0.5, 1);
+    --transition-medium: 0.6s ease;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--bg-light);
+    color: var(--text-dark);
+    overflow: hidden; /* No scroll, stepped presentation */
+    transition: background-color var(--transition-slow), color var(--transition-slow);
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+/* FASE 4 & 5 - Dark Mode */
+body.dark-mode {
+    background-color: var(--bg-dark);
+    color: var(--text-light);
+}
+
+/* Header */
+#site-header {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    padding: 24px 40px;
+    background: rgba(255, 255, 255, 1);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(0,0,0,0.05);
+    z-index: 100;
+    transition: all var(--transition-medium);
+}
+
+.logo-container {
+    display: flex;
+    align-items: center;
+}
+
+.header-text h1 {
+    font-size: 1.4rem;
+    font-weight: 800;
+    margin-bottom: 4px;
+    letter-spacing: -0.5px;
+    color: var(--text-dark);
+}
+
+.header-text p {
+    font-size: 0.95rem;
+    color: var(--text-muted);
+}
+
+/* Stage */
+#kdd-stage {
+    flex: 1;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+/* Cenas Fixas de Fundo */
+#scene-wrapper {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    width: 80%;
+    justify-content: space-between;
+    z-index: 1;
+    opacity: 0.3;
+    transition: opacity var(--transition-medium);
+}
+
+body.dark-mode #scene-wrapper {
+    opacity: 0.1; /* Fade out scenes in dark mode */
+}
+
+.scene {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+}
+
+.icon-container {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: white;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--bg-dark-secondary);
+    transition: all 0.3s;
+}
+
+body.dark-mode .icon-container {
+    background: var(--bg-dark-secondary);
+    color: var(--text-light);
+    box-shadow: none;
+}
+
+.icon-container svg {
+    width: 30px;
+    height: 30px;
+}
+
+.scene h2 {
+    font-size: 1rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: inherit;
+}
+
+/* Partículas e Dados */
+#particle-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 10;
+}
+
+.particle {
+    position: absolute;
+    background: white;
+    color: var(--text-dark);
+    font-size: 11px;
+    font-weight: 500;
+    padding: 8px 12px;
+    border-radius: 6px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    white-space: nowrap;
+    transition: all var(--transition-slow);
+    will-change: transform, opacity, left, top;
+}
+
+body.dark-mode .particle {
+    background: var(--bg-dark-secondary);
+    color: var(--aws-cyan);
+    font-family: monospace;
+    font-size: 13px;
+    box-shadow: 0 0 10px rgba(0, 161, 201, 0.3);
+}
+
+/* O Núcleo de IA */
+#ai-core {
+    position: absolute;
+    top: 50%;
+    left: 70%;
+    transform: translate(-50%, -50%) scale(0);
+    z-index: 5;
+    opacity: 0;
+    transition: all var(--transition-slow);
+}
+
+#ai-core.active {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+}
+
+.core-center {
+    width: 80px;
+    height: 80px;
+    background: var(--amazon-orange);
+    border-radius: 50%;
+    box-shadow: 0 0 40px var(--amazon-orange);
+    animation: pulse 2s infinite alternate;
+}
+
+.core-rings {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 200px;
+    height: 200px;
+    border: 2px dashed var(--aws-cyan);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    animation: spin 10s linear infinite;
+}
+
+@keyframes pulse {
+    0% { transform: scale(0.9); box-shadow: 0 0 20px var(--amazon-orange); }
+    100% { transform: scale(1.1); box-shadow: 0 0 60px var(--amazon-orange); }
+}
+
+@keyframes spin {
+    100% { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+/* Golden Summary */
+#golden-summary {
+    position: absolute;
+    top: 50%;
+    left: 85%;
+    transform: translate(-50%, -50%) scale(0.8) translateY(20px);
+    z-index: 20;
+    opacity: 0;
+    transition: all 1s cubic-bezier(0.34, 1.56, 0.64, 1);
+    pointer-events: none;
+}
+
+#golden-summary.visible {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1) translateY(0);
+}
+
+.summary-content {
+    background: linear-gradient(135deg, #F9D423 0%, #FF4E50 100%);
+    padding: 30px;
+    border-radius: 16px;
+    box-shadow: 0 20px 50px var(--gold-glow);
+    text-align: center;
+    color: white;
+    max-width: 320px;
+}
+
+.summary-content h3 {
+    font-size: 1.2rem;
+    margin-bottom: 15px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.summary-content p {
+    font-size: 1.3rem;
+    font-weight: 600;
+    line-height: 1.4;
+    margin-bottom: 20px;
+}
+
+.badge {
+    background: rgba(255,255,255,0.2);
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 800;
+}
+
+/* UI Didática */
+#story-controls {
+    position: absolute;
+    bottom: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    max-width: 900px;
+    z-index: 100;
+}
+
+.glass-panel {
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 16px;
+    padding: 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+    transition: all var(--transition-medium);
+}
+
+body.dark-mode .glass-panel {
+    background: rgba(35, 47, 62, 0.85);
+    border-color: rgba(255, 255, 255, 0.1);
+    box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+}
+
+#didactic-panel {
+    flex: 1;
+    padding-right: 40px;
+}
+
+.phase-badge {
+    display: inline-block;
+    background: var(--amazon-orange);
+    color: white;
+    padding: 4px 10px;
+    border-radius: 6px;
+    font-size: 0.8rem;
+    font-weight: 800;
+    margin-bottom: 10px;
+    letter-spacing: 1px;
+}
+
+#phase-title {
+    font-size: 1.5rem;
+    font-weight: 800;
+    margin-bottom: 10px;
+    transition: color 0.3s;
+}
+
+#phase-description {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: var(--text-muted);
+    transition: color 0.3s;
+}
+
+body.dark-mode #phase-title { color: white; }
+body.dark-mode #phase-description { color: var(--text-muted-light); }
+
+.actions {
+    display: flex;
+    gap: 15px;
+}
+
+button {
+    font-family: inherit;
+    padding: 14px 24px;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.btn-amazon {
+    background-color: var(--amazon-orange);
+    color: white;
+    box-shadow: 0 4px 14px rgba(255, 153, 0, 0.3);
+}
+
+.btn-amazon:hover {
+    background-color: var(--amazon-orange-hover);
+    transform: translateY(-2px);
+}
+
+.btn-secondary {
+    background-color: #e2e8f0;
+    color: #4a5568;
+}
+
+body.dark-mode .btn-secondary {
+    background-color: #2d3748;
+    color: #e2e8f0;
+}
+
+.btn-secondary:hover:not(:disabled) {
+    background-color: #cbd5e0;
+}
+
+button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none;
+}
